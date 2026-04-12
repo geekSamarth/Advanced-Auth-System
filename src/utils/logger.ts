@@ -53,6 +53,16 @@ const transports = [
   new winston.transports.Console({
     format: process.env.NODE_ENV === "production" ? prodFormat : devFormat,
   }),
+  // Allow the logger to write to log files
+  new winston.transports.File({
+    filename: "logs/error.log",
+    level: "error",
+    format: prodFormat,
+  }),
+  new winston.transports.File({
+    filename: "logs/combined.log",
+    format: prodFormat,
+  }),
 ];
 
 // Create the logger instance that has to be exported
