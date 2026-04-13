@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { HttpError } from "http-errors";
 import logger from "../utils/logger";
 
 // Centralized Error Handling Middleware
