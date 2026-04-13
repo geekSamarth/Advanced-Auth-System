@@ -4,13 +4,16 @@ import { timestamp } from "drizzle-orm/pg-core";
 import { text } from "drizzle-orm/pg-core";
 import { uuid } from "drizzle-orm/pg-core";
 import { pgTable } from "drizzle-orm/pg-core";
-export const user = pgTable("user", {
+export const users = pgTable("users", {
   id: uuid().primaryKey().defaultRandom(),
   email: varchar({ length: 255 }).notNull().unique(),
   password: text().notNull(),
   phone: varchar({ length: 15 }).notNull(),
   fullName: varchar({ length: 255 }).notNull(),
+  isVerified: boolean().default(false),
   isActive: boolean().notNull().default(true),
   createdAt: timestamp().defaultNow().notNull(),
-  updatedAt: timestamp().defaultNow(),
+  updatedAt: timestamp()
+    .defaultNow()
+    .$onUpdateFn(() => new Date()),
 });
