@@ -6,6 +6,7 @@ import helmet from "helmet";
 import morganMiddleware from "./middlewares/morganMiddleware";
 import { ApiError } from "./utils/ApiError";
 import { errorHandler } from "./middlewares/errorHandler";
+import healthcheckRouter from "./routes/healthcheck.routes";
 
 const app = express();
 
@@ -24,6 +25,10 @@ app.use(
 app.use(cookieParser());
 app.use(helmet());
 app.use(morganMiddleware);
+
+// healthcheck route
+
+app.use("/api/v1", healthcheckRouter);
 
 // 404 Catch-All Middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
