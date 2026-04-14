@@ -20,11 +20,21 @@ pool.on("connect", () => {
 
 pool.on("error", (err) => {
   logger.error(`Unexpected error on idle database client: ${err.message}`, err);
-  process.exit(-1);
+  throw err;
 });
 
 // Initialize Drizzle ORM
 export const db = drizzle(pool);
+
+// Helper for checking database connection on startup
+export const checkDatabaseConnection = async () => {
+  try {
+    const client = await pool.connect();
+    client.release();
+  } catch (err: any) {
+    logger.error(`Database connection failed: ${err.message}`);
+  }
+};
 
 // Helper for graceful database shutdown
 export const closeDatabase = async () => {
