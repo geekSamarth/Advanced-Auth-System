@@ -6,6 +6,9 @@ CREATE TABLE "users" (
 	"fullName" varchar(255) NOT NULL,
 	"isVerified" boolean DEFAULT false,
 	"isActive" boolean DEFAULT true NOT NULL,
+	"role" text DEFAULT 'user',
+	"failedAttempts" integer DEFAULT 0,
+	"lockUntil" timestamp,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
 	"updatedAt" timestamp DEFAULT now(),
 	CONSTRAINT "users_email_unique" UNIQUE("email")

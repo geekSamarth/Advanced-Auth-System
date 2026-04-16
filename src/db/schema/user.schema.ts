@@ -1,9 +1,12 @@
-import { varchar } from "drizzle-orm/pg-core";
-import { boolean } from "drizzle-orm/pg-core";
-import { timestamp } from "drizzle-orm/pg-core";
-import { text } from "drizzle-orm/pg-core";
-import { uuid } from "drizzle-orm/pg-core";
-import { pgTable } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  varchar,
+  integer,
+  timestamp,
+  text,
+  uuid,
+  pgTable,
+} from "drizzle-orm/pg-core";
 export const users = pgTable("users", {
   id: uuid().primaryKey().defaultRandom(),
   email: varchar({ length: 255 }).notNull().unique(),
@@ -12,6 +15,9 @@ export const users = pgTable("users", {
   fullName: varchar({ length: 255 }).notNull(),
   isVerified: boolean().default(false),
   isActive: boolean().notNull().default(true),
+  role: text().default("user"),
+  failedAttempts: integer().default(0),
+  lockUntil: timestamp(),
   createdAt: timestamp().defaultNow().notNull(),
   updatedAt: timestamp()
     .defaultNow()

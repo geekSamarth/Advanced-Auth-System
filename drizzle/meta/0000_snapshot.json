@@ -1,5 +1,5 @@
 {
-  "id": "78d9139a-1a17-40e7-b3dd-232430df112b",
+  "id": "667d371f-fc1d-430f-a508-78c6cc3436de",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -52,6 +52,26 @@
           "primaryKey": false,
           "notNull": true,
           "default": true
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'user'"
+        },
+        "failedAttempts": {
+          "name": "failedAttempts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "lockUntil": {
+          "name": "lockUntil",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
         },
         "createdAt": {
           "name": "createdAt",
