@@ -6,8 +6,7 @@ import helmet from "helmet";
 import morganMiddleware from "./middlewares/morganMiddleware";
 import { ApiError } from "./utils/ApiError";
 import { errorHandler } from "./middlewares/errorHandler";
-import healthcheckRouter from "./routes/healthcheck.routes";
-
+import healthcheckRouter from "./modules/healthcheck/healthcheck.routes";
 const app = express();
 
 // ========================================
